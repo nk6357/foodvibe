@@ -50,7 +50,8 @@ Cloudflare Pages is a common alternative for commercial static hosting. Connect 
 - Build command: `npm run build`
 - Output directory: `dist`
 
-Run `node scripts/create-demo-assets.js` in CI only if demo assets are not committed.
+Do not generate demo assets in production CI. Commit the real restaurant assets
+before deployment and let `npm run validate` stop the build when anything is missing.
 
 ## Subpath-safe assets
 

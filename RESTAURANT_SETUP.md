@@ -49,12 +49,24 @@ npm run optimize:images
 ## 4. Validate locally
 
 ```bash
-node scripts/create-demo-assets.js   # only for first clone if demo images missing
 npm run validate
 npm test
 npm run build
 npm run preview
 ```
+
+Do not run `scripts/create-demo-assets.js` after adding restaurant materials.
+The script is intended only to fill missing sample files. It will not overwrite
+existing files, but production repositories should not depend on demo assets.
+
+You may prepare raster images with:
+
+```bash
+npm run optimize:images
+```
+
+Existing WebP files are optimized in place. JPG and PNG files are converted to
+same-named WebP files without deleting their originals.
 
 Fix every validation error before pushing.
 

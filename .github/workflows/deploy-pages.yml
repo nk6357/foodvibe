@@ -30,14 +30,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create demo assets
-        run: node scripts/create-demo-assets.js
-
       - name: Validate menu
         run: npm run validate
 
       - name: Lint
         run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
 
       - name: Test
         run: npm test
@@ -46,7 +46,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 

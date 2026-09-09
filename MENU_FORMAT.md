@@ -7,32 +7,32 @@ The only source of menu data is `public/restaurant/menu.json`.
 ```json
 {
   "schemaVersion": 1,
-  "restaurant": { },
-  "theme": { },
-  "features": { },
-  "legal": { },
-  "seo": { },
-  "downloads": [ ],
-  "categories": [ ]
+  "restaurant": {},
+  "theme": {},
+  "features": {},
+  "legal": {},
+  "seo": {},
+  "downloads": [],
+  "categories": []
 }
 ```
 
 ## restaurant
 
-| Field | Required | Notes |
-|-------|----------|-------|
-| `name` | yes | Restaurant name |
-| `shortDescription` | no | Shown in header |
-| `description` | no | Hero section |
-| `currency` | no | Default `RUB` |
-| `locale` | no | Default `ru-RU` |
-| `timeZone` | yes | Valid IANA timezone |
-| `phone` | no | Displayed in contacts |
-| `email` | no | Displayed in contacts |
-| `address` | no | |
-| `workingHours` | no | |
-| `mapUrl` | no | HTTPS embed URL only; loaded after user consent |
-| `socialLinks` | no | HTTPS URLs only |
+| Field              | Required | Notes                                           |
+| ------------------ | -------- | ----------------------------------------------- |
+| `name`             | yes      | Restaurant name                                 |
+| `shortDescription` | no       | Shown in header                                 |
+| `description`      | no       | Hero section                                    |
+| `currency`         | no       | Default `RUB`                                   |
+| `locale`           | no       | Default `ru-RU`                                 |
+| `timeZone`         | yes      | Valid IANA timezone                             |
+| `phone`            | no       | Displayed in contacts                           |
+| `email`            | no       | Displayed in contacts                           |
+| `address`          | no       |                                                 |
+| `workingHours`     | no       |                                                 |
+| `mapUrl`           | no       | HTTPS embed URL only; loaded after user consent |
+| `socialLinks`      | no       | HTTPS URLs only                                 |
 
 ## theme
 

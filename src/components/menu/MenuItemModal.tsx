@@ -1,5 +1,10 @@
 import { useState } from "react";
-import type { FeaturesConfig, MenuItem, RestaurantInfo, ThemeConfig } from "@/schema/menuTypes";
+import type {
+  FeaturesConfig,
+  MenuItem,
+  RestaurantInfo,
+  ThemeConfig,
+} from "@/schema/menuTypes";
 import { Modal } from "@/components/ui/Modal";
 import { dishImagePath, placeholderImagePath } from "@/utils/assetPath";
 import { formatPrice } from "@/utils/formatters";

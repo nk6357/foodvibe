@@ -23,37 +23,62 @@ async function walk(dir) {
   return files;
 }
 
-async function optimize(filePath) {
-  const image = sharp(filePath, { failOn: "none" });
-  const metadata = await image.metadata();
-  const maxWidth = 1600;
+export async function optimizeImage(filePath, displayRoot = root) {
+  const parsedPath = path.parse(filePath);
+  const isWebp = parsedPath.ext.toLowerCase() === ".webp";
+  const targetPath = isWebp
+    ? filePath
+    : path.join(parsedPath.dir, `${parsedPath.name}.webp`);
+  const temporaryPath = `${targetPath}.tmp-${process.pid}`;
 
-  let pipeline = image;
-  if (metadata.width && metadata.width > maxWidth) {
-    pipeline = pipeline.resize({ width: maxWidth, withoutEnlargement: true });
+  if (!isWebp) {
+    try {
+      await fs.access(targetPath);
+      console.warn(
+        `Skipped ${path.relative(displayRoot, filePath)}: ${path.relative(displayRoot, targetPath)} already exists.`,
+      );
+      return;
+    } catch {
+      // The WebP target does not exist yet, so conversion is safe.
+    }
   }
 
-  if (filePath.endsWith(".webp")) {
-    await pipeline.webp({ quality: 82 }).toFile(`${filePath}.tmp`);
-  } else {
-    await pipeline
+  try {
+    await sharp(filePath, { failOn: "none" })
+      .rotate()
+      .resize({
+        width: 1600,
+        height: 1600,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
       .webp({ quality: 82 })
-      .toFile(`${filePath.replace(/\.(jpg|jpeg|png)$/i, ".webp")}.tmp`);
-  }
+      .toFile(temporaryPath);
 
-  await fs.rename(`${filePath}.tmp`, filePath);
-  console.log(`Optimized ${path.relative(root, filePath)}`);
+    await fs.rename(temporaryPath, targetPath);
+    console.log(
+      `${isWebp ? "Optimized" : "Converted"} ${path.relative(displayRoot, targetPath)}`,
+    );
+  } catch (error) {
+    await fs.rm(temporaryPath, { force: true }).catch(() => {});
+    throw error;
+  }
 }
 
 async function main() {
   const files = await walk(assetsDir);
   for (const file of files) {
-    await optimize(file);
+    await optimizeImage(file);
   }
   console.log("Image optimization complete.");
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

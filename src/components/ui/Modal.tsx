@@ -43,11 +43,7 @@ export function Modal({ isOpen, onClose, ariaLabel, children }: ModalProps) {
   }
 
   return (
-    <div
-      className={styles.overlay}
-      onClick={onClose}
-      role="presentation"
-    >
+    <div className={styles.overlay} onClick={onClose} role="presentation">
       <div
         ref={dialogRef}
         className={styles.dialog}

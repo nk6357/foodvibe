@@ -92,7 +92,9 @@ export function buildThemeVariables(
     "--color-text-muted": rgbArrayToCss(textMuted),
     "--color-border": rgbArrayToCss(border),
     "--color-focus": rgbArrayToCss(focus),
-    "--color-overlay": isDarkBackground ? "rgba(0, 0, 0, 0.55)" : "rgba(15, 15, 15, 0.45)",
+    "--color-overlay": isDarkBackground
+      ? "rgba(0, 0, 0, 0.55)"
+      : "rgba(15, 15, 15, 0.45)",
     "--shadow-card": isDarkBackground
       ? "0 1px 2px rgba(0, 0, 0, 0.35)"
       : "0 1px 2px rgba(15, 15, 15, 0.06)",

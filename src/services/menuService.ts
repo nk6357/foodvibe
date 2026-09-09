@@ -46,10 +46,7 @@ export function filterCategoriesWithItems(
     .filter((category) => category.items.length > 0);
 }
 
-export function searchMenuItems(
-  items: FlatMenuItem[],
-  query: string,
-): FlatMenuItem[] {
+export function searchMenuItems(items: FlatMenuItem[], query: string): FlatMenuItem[] {
   const normalizedQuery = normalizeSearchText(query);
   if (!normalizedQuery) {
     return items;

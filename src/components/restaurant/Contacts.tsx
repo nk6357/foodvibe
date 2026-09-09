@@ -13,7 +13,11 @@ export function Contacts({ restaurant }: ContactsProps) {
   const hasMap = Boolean(restaurant.mapUrl);
 
   return (
-    <section id="contacts-section" className={styles.section} aria-labelledby="contacts-title">
+    <section
+      id="contacts-section"
+      className={styles.section}
+      aria-labelledby="contacts-title"
+    >
       <div className="container">
         <h2 id="contacts-title" className="sectionTitle">
           Контакты
@@ -34,7 +38,10 @@ export function Contacts({ restaurant }: ContactsProps) {
           {restaurant.phone ? (
             <div className={styles.card}>
               <div className={styles.label}>Телефон</div>
-              <a className={`${styles.value} ${styles.link}`} href={phoneHref(restaurant.phone)}>
+              <a
+                className={`${styles.value} ${styles.link}`}
+                href={phoneHref(restaurant.phone)}
+              >
                 {formatPhoneDisplay(restaurant.phone)}
               </a>
             </div>
@@ -42,7 +49,10 @@ export function Contacts({ restaurant }: ContactsProps) {
           {restaurant.email ? (
             <div className={styles.card}>
               <div className={styles.label}>Email</div>
-              <a className={`${styles.value} ${styles.link}`} href={`mailto:${restaurant.email}`}>
+              <a
+                className={`${styles.value} ${styles.link}`}
+                href={`mailto:${restaurant.email}`}
+              >
                 {restaurant.email}
               </a>
             </div>

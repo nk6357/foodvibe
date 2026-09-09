@@ -71,10 +71,7 @@ export default function App() {
     );
   }, [menu]);
 
-  const flatItems = useMemo(
-    () => flattenMenu(visibleCategories),
-    [visibleCategories],
-  );
+  const flatItems = useMemo(() => flattenMenu(visibleCategories), [visibleCategories]);
 
   const { query, setQuery, results, isSearching } = useSearch(flatItems);
 

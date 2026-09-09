@@ -1,5 +1,10 @@
 import { useState } from "react";
-import type { FeaturesConfig, MenuItem, RestaurantInfo, ThemeConfig } from "@/schema/menuTypes";
+import type {
+  FeaturesConfig,
+  MenuItem,
+  RestaurantInfo,
+  ThemeConfig,
+} from "@/schema/menuTypes";
 import { dishImagePath, placeholderImagePath } from "@/utils/assetPath";
 import { formatPrice } from "@/utils/formatters";
 import { SpiceIndicator } from "./SpiceIndicator";
@@ -13,13 +18,7 @@ interface MenuCardProps {
   onOpen?: (item: MenuItem) => void;
 }
 
-export function MenuCard({
-  item,
-  restaurant,
-  features,
-  theme,
-  onOpen,
-}: MenuCardProps) {
+export function MenuCard({ item, restaurant, features, theme, onOpen }: MenuCardProps) {
   const [imageError, setImageError] = useState(false);
   const imageSrc =
     item.hasImage && !imageError ? dishImagePath(item.id) : placeholderImagePath();
@@ -87,7 +86,9 @@ export function MenuCard({
   }
 
   return (
-    <article className={`${styles.card} ${!item.available ? styles.cardUnavailable : ""}`}>
+    <article
+      className={`${styles.card} ${!item.available ? styles.cardUnavailable : ""}`}
+    >
       {content}
     </article>
   );

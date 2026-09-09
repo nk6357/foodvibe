@@ -18,7 +18,21 @@ async function ensureDir(dir) {
   await fs.mkdir(dir, { recursive: true });
 }
 
+async function exists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function createWebp(filePath, color, label) {
+  if (await exists(filePath)) {
+    console.log(`Skipped existing asset: ${path.relative(root, filePath)}`);
+    return;
+  }
+
   const svg = `
     <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
       <rect width="800" height="600" fill="${color}"/>
@@ -31,6 +45,11 @@ async function createWebp(filePath, color, label) {
 }
 
 async function createPdfPlaceholder(filePath, title) {
+  if (await exists(filePath)) {
+    console.log(`Skipped existing document: ${path.relative(root, filePath)}`);
+    return;
+  }
+
   const content = `%PDF-1.4
 1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj
 2 0 obj<< /Type /Pages /Kids [3 0 R] /Count 1 >>endobj

@@ -4,12 +4,7 @@ export type CardStyle = "rounded" | "sharp";
 export type ImageStyle = "cover" | "contain";
 export type Density = "compact" | "comfortable" | "spacious";
 export type SocialLinkType =
-  | "telegram"
-  | "whatsapp"
-  | "instagram"
-  | "vk"
-  | "website"
-  | "other";
+  "telegram" | "whatsapp" | "instagram" | "vk" | "website" | "other";
 
 export interface SocialLink {
   type: SocialLinkType;

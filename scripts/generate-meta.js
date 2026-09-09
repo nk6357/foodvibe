@@ -29,13 +29,22 @@ html = html.replace(
   `<meta name="theme-color" content="${themeColor}" />`,
 );
 
+const robotsPattern = /\s*<meta name="robots" content="[^"]*" \/>/;
+
 if (!menu.seo?.index) {
-  if (!html.includes('name="robots"')) {
+  if (robotsPattern.test(html)) {
+    html = html.replace(
+      robotsPattern,
+      '\n    <meta name="robots" content="noindex, nofollow" />',
+    );
+  } else {
     html = html.replace(
       "</head>",
       '    <meta name="robots" content="noindex, nofollow" />\n  </head>',
     );
   }
+} else {
+  html = html.replace(robotsPattern, "");
 }
 
 fs.writeFileSync(indexPath, html, "utf8");

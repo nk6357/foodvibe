@@ -18,7 +18,6 @@ This template is **informational only**. It does not include cart, checkout, res
 
 ```bash
 npm ci
-node scripts/create-demo-assets.js
 npm run dev
 ```
 
@@ -63,16 +62,16 @@ public/restaurant/
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Local development server |
-| `npm run validate` | Validate `menu.json` and assets |
-| `npm run build` | Validate, update meta, typecheck, build |
-| `npm test` | Run Vitest tests |
-| `npm run lint` | ESLint |
-| `npm run generate:qr -- --url=...` | Create QR PNG/SVG in `output/` |
-| `npm run optimize:images` | Optional WebP optimization |
-| `node scripts/create-demo-assets.js` | Generate demo images for the sample restaurant |
+| Command                              | Description                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------- |
+| `npm run dev`                        | Local development server                                                           |
+| `npm run validate`                   | Validate `menu.json` and assets                                                    |
+| `npm run build`                      | Validate, update meta, typecheck, build                                            |
+| `npm test`                           | Run Vitest tests                                                                   |
+| `npm run lint`                       | ESLint                                                                             |
+| `npm run generate:qr -- --url=...`   | Create QR PNG/SVG in `output/`                                                     |
+| `npm run optimize:images`            | Optional WebP optimization                                                         |
+| `node scripts/create-demo-assets.js` | Create only missing sample assets; existing restaurant files are never overwritten |
 
 ## Documentation
 
@@ -100,6 +99,20 @@ Files are written to:
 
 - `output/qr-menu.svg`
 - `output/qr-menu.png`
+
+## Image preparation
+
+Place restaurant photos in `public/restaurant/assets/dishes/`. Files already in
+WebP format are optimized in place. JPG and PNG sources are converted to a WebP
+file with the same basename, while the original source is preserved. If the WebP
+target already exists, the converter skips it instead of overwriting it.
+
+```bash
+npm run optimize:images
+```
+
+The site favicon uses `public/restaurant/assets/logo.svg`, so replacing the
+restaurant logo also updates the browser-tab icon.
 
 ## Template version
 

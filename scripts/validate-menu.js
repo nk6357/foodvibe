@@ -302,7 +302,9 @@ function main() {
         expectedDishImages.add(String(item.id));
         const imagePath = path.join(dishesDir, `${item.id}.webp`);
         if (!fs.existsSync(imagePath)) {
-          fail(`Missing dish image for id ${item.id}: public/restaurant/assets/dishes/${item.id}.webp`);
+          fail(
+            `Missing dish image for id ${item.id}: public/restaurant/assets/dishes/${item.id}.webp`,
+          );
         }
       }
     }
@@ -310,7 +312,9 @@ function main() {
 
   for (const fileId of dishFiles) {
     if (!expectedDishImages.has(fileId)) {
-      fail(`Unexpected dish image without menu item: public/restaurant/assets/dishes/${fileId}.webp`);
+      fail(
+        `Unexpected dish image without menu item: public/restaurant/assets/dishes/${fileId}.webp`,
+      );
     }
   }
 

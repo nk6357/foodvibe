@@ -23,8 +23,8 @@
   --container-max: 1120px;
   --header-height: 64px;
   --category-nav-height: 52px;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    sans-serif;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --transition-fast: 150ms ease;
   --transition-base: 220ms ease;
 }
