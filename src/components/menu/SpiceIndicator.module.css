@@ -1,0 +1,22 @@
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.pepper {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+.pepperActive {
+  background: var(--color-accent);
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-left: 0.25rem;
+}

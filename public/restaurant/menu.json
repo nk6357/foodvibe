@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "restaurant": {
+    "name": "Кофейня «Утро»",
+    "shortDescription": "Завтраки, выпечка и specialty coffee",
+    "description": "Уютное место в центре города с сезонным меню, авторской выпечкой и filter coffee. Работаем каждый день с раннего утра.",
+    "currency": "RUB",
+    "locale": "ru-RU",
+    "timeZone": "Europe/Moscow",
+    "phone": "+7 495 123-45-67",
+    "email": "hello@utro-cafe.example.com",
+    "address": "Москва, ул. Примерная, 12",
+    "workingHours": "Ежедневно с 08:00 до 22:00",
+    "mapUrl": "https://yandex.ru/map-widget/v1/?um=constructor%3Aexample",
+    "socialLinks": [
+      {
+        "type": "telegram",
+        "label": "Telegram",
+        "url": "https://t.me/example"
+      },
+      {
+        "type": "instagram",
+        "label": "Instagram",
+        "url": "https://instagram.com/example"
+      }
+    ]
+  },
+  "theme": {
+    "accent": [44, 110, 89],
+    "background": [247, 246, 242],
+    "cardStyle": "rounded",
+    "imageStyle": "cover",
+    "density": "comfortable"
+  },
+  "features": {
+    "search": true,
+    "categoryNavigation": true,
+    "dishModal": true,
+    "contacts": true,
+    "downloadableMenu": true,
+    "showDescriptions": true,
+    "showWeights": true,
+    "showLabels": true,
+    "showAllergens": true,
+    "showSpiceLevel": true,
+    "showUnavailableItems": false
+  },
+  "legal": {
+    "enabled": true,
+    "version": "2026-01-01",
+    "organizationName": "ООО «Утро»",
+    "privacyEmail": "privacy@utro-cafe.example.com",
+    "offerDocument": "restaurant/assets/documents/offer.pdf",
+    "privacyDocument": "restaurant/assets/documents/privacy.pdf"
+  },
+  "seo": {
+    "index": true,
+    "title": null,
+    "description": null
+  },
+  "downloads": [
+    {
+      "id": "main-menu",
+      "title": "Меню ресторана",
+      "description": "Полная версия меню в PDF",
+      "file": "restaurant/assets/documents/menu.pdf"
+    }
+  ],
+  "categories": [
+    {
+      "id": "breakfasts",
+      "name": "Завтраки",
+      "description": "Каждый день до 14:00",
+      "items": [
+        {
+          "id": 1001,
+          "name": "Сырники",
+          "description": "Сметана, сезонные ягоды и варенье",
+          "price": 390,
+          "oldPrice": null,
+          "weight": "220 г",
+          "labels": ["Хит"],
+          "allergens": ["Молоко", "Яйцо"],
+          "spiceLevel": 0,
+          "available": true,
+          "hasImage": true
+        },
+        {
+          "id": 1002,
+          "name": "Яичница с авокадо",
+          "description": "Два яйца, тост из заквасочного хлеба, авокадо и микс салата",
+          "price": 450,
+          "oldPrice": null,
+          "weight": "280 г",
+          "labels": [],
+          "allergens": ["Яйцо", "Глютен"],
+          "spiceLevel": 0,
+          "available": true,
+          "hasImage": true
+        }
+      ]
+    },
+    {
+      "id": "coffee",
+      "name": "Кофе",
+      "description": "Filter и espresso",
+      "items": [
+        {
+          "id": 1003,
+          "name": "Flat White",
+          "description": "Двойной эспрессо и барista milk",
+          "price": 290,
+          "oldPrice": 320,
+          "weight": "200 мл",
+          "labels": ["Новинка"],
+          "allergens": ["Молоко"],
+          "spiceLevel": 0,
+          "available": true,
+          "hasImage": true
+        },
+        {
+          "id": 1004,
+          "name": "Filter Ethiopia",
+          "description": "Цветы, персик, лёгкая сладость",
+          "price": 340,
+          "oldPrice": null,
+          "weight": "250 мл",
+          "labels": [],
+          "allergens": [],
+          "spiceLevel": 0,
+          "available": false,
+          "hasImage": false
+        }
+      ]
+    },
+    {
+      "id": "bowls",
+      "name": "Боулы",
+      "items": [
+        {
+          "id": 1005,
+          "name": "Поке с лососем",
+          "description": "Рис, лосось, огурцы, эдамame, соус спайси",
+          "price": 690,
+          "oldPrice": null,
+          "weight": "320 г",
+          "labels": ["Острое"],
+          "allergens": ["Рыба", "Соя"],
+          "spiceLevel": 2,
+          "available": true,
+          "hasImage": true
+        }
+      ]
+    }
+  ]
+}

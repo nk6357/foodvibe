@@ -1,0 +1,30 @@
+:root {
+  --color-accent: rgb(44, 110, 89);
+  --color-accent-hover: rgb(36, 92, 75);
+  --color-accent-pressed: rgb(28, 74, 61);
+  --color-on-accent: rgb(255, 255, 255);
+  --color-background: rgb(247, 246, 242);
+  --color-surface: rgb(255, 255, 255);
+  --color-surface-muted: rgb(241, 240, 236);
+  --color-text: rgb(24, 24, 27);
+  --color-text-muted: rgb(96, 96, 102);
+  --color-border: rgb(224, 223, 218);
+  --color-focus: rgb(44, 110, 89);
+  --color-overlay: rgba(15, 15, 15, 0.45);
+  --shadow-card: 0 1px 2px rgba(15, 15, 15, 0.06);
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --container-max: 1120px;
+  --header-height: 64px;
+  --category-nav-height: 52px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms ease;
+}
