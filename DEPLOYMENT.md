@@ -6,29 +6,29 @@ This template produces a static site in `dist/`. No server-side runtime is requi
 
 Primary host:
 
-- Vercel static hosting
+- GitHub Pages
 
 No environment variables, SMTP, database, or API endpoints are needed.
 
-## Vercel
+## GitHub Pages
 
-Import the GitHub repository into Vercel and use these settings:
+GitHub Pages publishes the menu automatically through GitHub Actions.
 
-- Framework preset: **Vite**
-- Build command: `npm run build`
-- Output directory: `dist`
-- Install command: `npm install` or the Vercel default
+Steps:
 
-The same settings are committed in `vercel.json`. No environment variables are
-required. Each push to `main` creates a production deployment when the Vercel Git
-integration is enabled; other branches and pull requests create preview
-deployments.
+1. Open repository **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Push changes to `main`.
+4. Wait for the `Deploy static QR menu` workflow to finish.
 
-GitHub Actions performs validation, formatting checks, tests, and a production
-build. It does not publish the site; Vercel handles deployment.
+The workflow validates formatting, menu data, linting and tests before publishing
+the generated `dist/` directory.
 
-Vercel Hobby is intended for non-commercial use; commercial projects may require
-Vercel Pro. Check the current Vercel terms before production use.
+The production Vite `base` is relative, so assets work on project URLs such as:
+
+```text
+https://username.github.io/repository-name/
+```
 
 ## Other static hosts
 
@@ -43,8 +43,9 @@ before deployment and let `npm run validate` stop the build when anything is mis
 
 ## Asset paths
 
-Never hardcode deployment-specific hostnames. Continue using `assetPath()` for
-menu data, documents, logos, and dish images.
+Never hardcode root paths such as `/restaurant/menu.json`. Continue using
+`assetPath()` so menu data, documents, logos, and dish images work from the
+repository subpath.
 
 ## QR files
 

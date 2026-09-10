@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, type KeyboardEvent } from "react";
 import type { MenuCategory } from "@/schema/menuTypes";
 import styles from "./CategoryNavigation.module.css";
 
@@ -15,38 +15,12 @@ export function CategoryNavigation({
 }: CategoryNavigationProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef(new Map<string, HTMLButtonElement>());
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const updateScrollState = useCallback(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return;
-    }
-
-    const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
-    const tolerance = 2;
-    setCanScrollLeft(scroller.scrollLeft > tolerance);
-    setCanScrollRight(scroller.scrollLeft < maxScrollLeft - tolerance);
-  }, []);
-
-  useEffect(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return;
-    }
-
-    updateScrollState();
-
-    const resizeObserver = new ResizeObserver(updateScrollState);
-    resizeObserver.observe(scroller);
-    window.addEventListener("resize", updateScrollState);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateScrollState);
-    };
-  }, [categories, updateScrollState]);
+  const activeIndex = Math.max(
+    categories.findIndex((category) => category.id === activeCategoryId),
+    0,
+  );
+  const canGoBackward = activeIndex > 0;
+  const canGoForward = activeIndex < categories.length - 1;
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -71,17 +45,11 @@ export function CategoryNavigation({
     }
   }, [activeCategoryId]);
 
-  const scrollCategories = (direction: -1 | 1) => {
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return;
+  const selectAdjacentCategory = (direction: -1 | 1) => {
+    const nextCategory = categories[activeIndex + direction];
+    if (nextCategory) {
+      onSelect(nextCategory.id);
     }
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    scroller.scrollBy({
-      left: direction * scroller.clientWidth * 0.75,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
   };
 
   const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -115,22 +83,17 @@ export function CategoryNavigation({
           <button
             type="button"
             className={styles.arrow}
-            aria-label="Прокрутить разделы влево"
+            aria-label="Предыдущий раздел меню"
             aria-controls="category-list"
-            disabled={!canScrollLeft}
-            onClick={() => scrollCategories(-1)}
+            disabled={!canGoBackward}
+            onClick={() => selectAdjacentCategory(-1)}
           >
             <svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="m15 18-6-6 6-6" />
             </svg>
           </button>
 
-          <div
-            id="category-list"
-            ref={scrollerRef}
-            className={styles.inner}
-            onScroll={updateScrollState}
-          >
+          <div id="category-list" ref={scrollerRef} className={styles.inner}>
             {categories.map((category, index) => {
               const isActive = category.id === activeCategoryId;
               return (
@@ -158,10 +121,10 @@ export function CategoryNavigation({
           <button
             type="button"
             className={styles.arrow}
-            aria-label="Прокрутить разделы вправо"
+            aria-label="Следующий раздел меню"
             aria-controls="category-list"
-            disabled={!canScrollRight}
-            onClick={() => scrollCategories(1)}
+            disabled={!canGoForward}
+            onClick={() => selectAdjacentCategory(1)}
           >
             <svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="m9 18 6-6-6-6" />

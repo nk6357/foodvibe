@@ -37,8 +37,8 @@ npm test
 npm run build
 ```
 
-6. Import the repository into Vercel and push to `main` — Vercel validates,
-   builds, and deploys automatically
+6. Push to `main` — GitHub Actions validates, tests, builds, and deploys to
+   GitHub Pages
 7. Generate a QR code for the permanent URL:
 
 ```bash
@@ -80,19 +80,19 @@ public/restaurant/
 - [RESTAURANT_SETUP.md](./RESTAURANT_SETUP.md) — step-by-step restaurant onboarding
 - [DEPLOYMENT.md](./DEPLOYMENT.md) — hosting notes and GitHub Pages limits
 
-## Vercel deployment
+## GitHub Pages deployment
 
-This template is configured for **Vercel static hosting**:
+This template is configured for **GitHub Pages static hosting**:
 
 - Build command: `npm run build`
 - Output directory: `dist`
 - Framework preset: Vite
 - No server, database, API, secrets, or environment variables required
-- `vercel.json` keeps the production settings explicit and reproducible
+- Production asset paths are relative, so project sites work from repository
+  subpaths
 
-GitHub Actions validates formatting, linting, tests, menu data, and the production
-build. Deployment is handled by the Vercel Git integration rather than GitHub
-Pages.
+GitHub Actions validates formatting, linting, tests, menu data, builds the site,
+and publishes `dist/` to GitHub Pages.
 
 ## QR output
 

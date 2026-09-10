@@ -69,10 +69,10 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid color-mix(in srgb, var(--color-accent) 24%, var(--color-border));
+  border: 1px solid var(--color-accent);
   border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   box-shadow: var(--shadow-card);
   transition:
     color var(--transition-fast),
@@ -92,8 +92,7 @@
 }
 
 .arrow:hover:not(:disabled) {
-  color: var(--color-on-accent);
-  background: var(--color-accent);
+  background: var(--color-accent-hover);
   border-color: var(--color-accent);
 }
 
@@ -103,7 +102,10 @@
 
 .arrow:disabled {
   cursor: default;
-  opacity: 0.3;
+  color: var(--color-text-muted);
+  background: var(--color-surface-muted);
+  border-color: var(--color-border);
+  opacity: 0.65;
 }
 
 @media (max-width: 359px) {
