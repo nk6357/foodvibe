@@ -76,7 +76,7 @@ export function MenuCard({ item, restaurant, features, theme, onOpen }: MenuCard
     return (
       <button
         type="button"
-        className={`${styles.card} ${!item.available ? styles.cardUnavailable : ""}`}
+        className={`${styles.card} ${styles.cardHasModal} ${!item.available ? styles.cardUnavailable : ""}`}
         onClick={() => onOpen(item)}
         aria-label={`Подробнее о блюде ${item.name}`}
       >

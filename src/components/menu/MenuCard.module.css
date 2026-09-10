@@ -124,6 +124,67 @@
   font-weight: 600;
 }
 
+@media (max-width: 639px) {
+  .card {
+    min-width: 0;
+    border-radius: max(0.625rem, calc(var(--radius-card) - 4px));
+  }
+
+  .imageWrap {
+    margin: 0.25rem 0.25rem 0;
+    border-radius: max(0.5rem, calc(var(--radius-card) - 8px));
+  }
+
+  .imageContain {
+    padding: 0.25rem;
+  }
+
+  .unavailableBadge {
+    top: 0.375rem;
+    left: 0.375rem;
+    max-width: calc(100% - 0.75rem);
+    padding: 0.125rem 0.375rem;
+    font-size: 0.625rem;
+    line-height: 1.15;
+  }
+
+  .body {
+    min-width: 0;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+
+  .headerRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+  }
+
+  .title {
+    overflow-wrap: anywhere;
+    font-size: clamp(0.75rem, 3.2vw, 0.875rem);
+    line-height: 1.2;
+  }
+
+  .priceBlock {
+    text-align: left;
+  }
+
+  .price {
+    font-size: clamp(0.75rem, 3.2vw, 0.875rem);
+  }
+
+  .oldPrice {
+    display: inline;
+    margin-left: 0.25rem;
+    font-size: 0.6875rem;
+  }
+
+  .cardHasModal .description,
+  .cardHasModal .meta {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card:hover {
     transform: none;
