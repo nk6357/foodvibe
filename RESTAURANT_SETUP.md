@@ -38,7 +38,11 @@ Rules:
 - Dish filenames must match dish IDs exactly
 - Do not leave extra dish images without a menu item
 - Keep images under 5 MB each
-- Use WebP for photos when possible
+- Use WebP for dish photos
+- Use at least 1200×900 pixels; 1600×1200 is preferred for Retina screens
+- Do not enlarge a small or compressed photo: request a higher-resolution source
+- Keep the important part of the dish near the center because cards use
+  `object-fit: cover`
 
 Optional optimization:
 
@@ -66,7 +70,8 @@ npm run optimize:images
 ```
 
 Existing WebP files are optimized in place. JPG and PNG files are converted to
-same-named WebP files without deleting their originals.
+same-named WebP files without deleting their originals. Existing WebP files that
+already fit within 2000×2000 are preserved without another lossy recompression.
 
 Fix every validation error before pushing.
 
@@ -91,6 +96,10 @@ Print `output/qr-menu.png` or use `output/qr-menu.svg`.
 ## Legal documents
 
 If you enable `legal.enabled`, provide your own PDF documents. The template is not legal advice — have a lawyer review privacy policy and public offer texts before publishing.
+
+Configure `legal.cookieNotice` in `menu.json` to show the informational notice
+about necessary technical cookies and local storage. Keep its wording consistent
+with the actual technologies used by the deployed site.
 
 ## Map embed
 

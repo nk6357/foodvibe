@@ -79,6 +79,18 @@ restaurant/assets/dishes/{dish.id}.webp
 
 Set `"hasImage": false` when no photo exists.
 
+For sharp rendering on high-density phone and tablet screens:
+
+- minimum accepted resolution: `800×600` pixels;
+- recommended resolution: at least `1200×900` pixels;
+- preferred upload size: `1600×1200` pixels;
+- format: WebP;
+- maximum file size: 5 MB.
+
+The optimization command preserves existing WebP files up to 2000 pixels on the
+longest side instead of recompressing them. Larger images and JPG/PNG sources are
+converted to high-quality WebP with a maximum edge of 2000 pixels.
+
 ## categories
 
 - Category order follows JSON order
@@ -98,11 +110,20 @@ Set `"hasImage": false` when no photo exists.
   "organizationName": "LLC Example",
   "privacyEmail": "privacy@example.com",
   "offerDocument": "restaurant/assets/documents/offer.pdf",
-  "privacyDocument": "restaurant/assets/documents/privacy.pdf"
+  "privacyDocument": "restaurant/assets/documents/privacy.pdf",
+  "cookieNotice": {
+    "enabled": true,
+    "text": "The site may use only necessary technical cookies and local storage for correct operation. Analytics and advertising cookies are not used.",
+    "buttonLabel": "OK",
+    "privacyLinkLabel": "Learn more"
+  }
 }
 ```
 
-Used only for footer links to downloadable documents. This template does not collect personal data and does not include order-related consent flows.
+Used for footer links and the optional notice about necessary technical cookies
+and local storage. Acknowledgement is stored locally in the visitor's browser.
+The template does not include analytics, advertising cookies, forms, orders, or
+reservation-related consent flows.
 
 ## downloads
 

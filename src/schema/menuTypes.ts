@@ -56,6 +56,14 @@ export interface LegalConfig {
   privacyEmail?: string;
   offerDocument?: string;
   privacyDocument?: string;
+  cookieNotice?: CookieNoticeConfig;
+}
+
+export interface CookieNoticeConfig {
+  enabled: boolean;
+  text: string;
+  buttonLabel: string;
+  privacyLinkLabel?: string;
 }
 
 export interface SeoConfig {

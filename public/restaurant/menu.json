@@ -51,7 +51,13 @@
     "organizationName": "ООО «Утро»",
     "privacyEmail": "privacy@utro-cafe.example.com",
     "offerDocument": "restaurant/assets/documents/offer.pdf",
-    "privacyDocument": "restaurant/assets/documents/privacy.pdf"
+    "privacyDocument": "restaurant/assets/documents/privacy.pdf",
+    "cookieNotice": {
+      "enabled": true,
+      "text": "Сайт может использовать только необходимые технические файлы cookie и локальное хранилище для корректной работы. Аналитические и рекламные cookie не используются.",
+      "buttonLabel": "Понятно",
+      "privacyLinkLabel": "Подробнее"
+    }
   },
   "seo": {
     "index": true,

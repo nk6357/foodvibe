@@ -51,7 +51,7 @@ describe("image optimization", () => {
     expect(targetMetadata.height).toBe(24);
   });
 
-  it("optimizes an existing WebP in place", async () => {
+  it("preserves an existing WebP that already fits the delivery limit", async () => {
     const directory = await createTemporaryDirectory();
     const imagePath = path.join(directory, "cover.webp");
 
@@ -70,7 +70,30 @@ describe("image optimization", () => {
 
     const metadata = await sharp(imagePath).metadata();
     expect(metadata.format).toBe("webp");
-    expect(metadata.width).toBe(1600);
-    expect(metadata.height).toBeLessThanOrEqual(1600);
+    expect(metadata.width).toBe(1800);
+    expect(metadata.height).toBe(1200);
+  });
+
+  it("reduces oversized WebP images to the high-quality delivery limit", async () => {
+    const directory = await createTemporaryDirectory();
+    const imagePath = path.join(directory, "large.webp");
+
+    await sharp({
+      create: {
+        width: 2400,
+        height: 1800,
+        channels: 3,
+        background: "#2c6e59",
+      },
+    })
+      .webp()
+      .toFile(imagePath);
+
+    await optimizeImage(imagePath, directory);
+
+    const metadata = await sharp(imagePath).metadata();
+    expect(metadata.format).toBe("webp");
+    expect(metadata.width).toBe(2000);
+    expect(metadata.height).toBe(1500);
   });
 });

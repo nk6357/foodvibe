@@ -3,6 +3,7 @@ import type { FlatMenuItem, MenuCategory, MenuItem } from "@/schema/menuTypes";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { CookieNotice } from "@/components/legal/CookieNotice";
 import { CategoryNavigation } from "@/components/menu/CategoryNavigation";
 import { MenuGrid } from "@/components/menu/MenuGrid";
 import { MenuItemModal } from "@/components/menu/MenuItemModal";
@@ -155,6 +156,7 @@ export default function App() {
         {menu.features.contacts ? <Contacts restaurant={menu.restaurant} /> : null}
       </main>
       <Footer restaurant={menu.restaurant} legal={menu.legal} />
+      <CookieNotice legal={menu.legal} />
       <MobileActionBar showContacts={menu.features.contacts} />
       {menu.features.dishModal ? (
         <MenuItemModal

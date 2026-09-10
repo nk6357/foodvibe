@@ -6,6 +6,8 @@ import sharp from "sharp";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const assetsDir = path.join(root, "public/restaurant/assets");
+const MAX_IMAGE_EDGE = 2000;
+const WEBP_QUALITY = 90;
 
 async function walk(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -43,16 +45,29 @@ export async function optimizeImage(filePath, displayRoot = root) {
     }
   }
 
+  if (isWebp) {
+    const metadata = await sharp(filePath, { failOn: "none" }).metadata();
+    const width = metadata.width ?? 0;
+    const height = metadata.height ?? 0;
+
+    if (width <= MAX_IMAGE_EDGE && height <= MAX_IMAGE_EDGE) {
+      console.log(
+        `Preserved ${path.relative(displayRoot, filePath)} (${width}x${height}): existing WebP was not recompressed.`,
+      );
+      return;
+    }
+  }
+
   try {
     await sharp(filePath, { failOn: "none" })
       .rotate()
       .resize({
-        width: 1600,
-        height: 1600,
+        width: MAX_IMAGE_EDGE,
+        height: MAX_IMAGE_EDGE,
         fit: "inside",
         withoutEnlargement: true,
       })
-      .webp({ quality: 82 })
+      .webp({ quality: WEBP_QUALITY, smartSubsample: true })
       .toFile(temporaryPath);
 
     await fs.rename(temporaryPath, targetPath);

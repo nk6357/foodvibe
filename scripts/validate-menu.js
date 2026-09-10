@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 import { z } from "zod";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -96,6 +97,14 @@ const menuSchema = z
         privacyEmail: z.string().email().optional(),
         offerDocument: z.string().optional(),
         privacyDocument: z.string().optional(),
+        cookieNotice: z
+          .object({
+            enabled: z.boolean().default(true),
+            text: safeString(500),
+            buttonLabel: safeString(60).default("Понятно"),
+            privacyLinkLabel: safeString(60).optional(),
+          })
+          .optional(),
       })
       .default({ enabled: false }),
     seo: z
@@ -209,6 +218,29 @@ function info(message) {
   console.log(`✓ ${message}`);
 }
 
+function warn(message) {
+  console.warn(`⚠ ${message}`);
+}
+
+async function validateImageResolution(filePath) {
+  const metadata = await sharp(filePath, { failOn: "none" }).metadata();
+  const width = metadata.width ?? 0;
+  const height = metadata.height ?? 0;
+  const relativePath = path.relative(root, filePath);
+
+  if (width < 800 || height < 600) {
+    fail(
+      `Image resolution is too low (${width}x${height}, minimum 800x600): ${relativePath}`,
+    );
+  }
+
+  if (width < 1200 || height < 900) {
+    warn(
+      `For sharp Retina rendering use at least 1200x900 (${width}x${height} now): ${relativePath}`,
+    );
+  }
+}
+
 function isValidTimeZone(timeZone) {
   try {
     Intl.DateTimeFormat(undefined, { timeZone });
@@ -253,7 +285,7 @@ function scanForSecrets(dir) {
   }
 }
 
-function main() {
+async function main() {
   if (!fs.existsSync(menuPath)) {
     fail("public/restaurant/menu.json not found");
   }
@@ -348,8 +380,15 @@ function main() {
   }
 
   for (const fileId of expectedDishImages) {
-    checkSize(path.join(dishesDir, `${fileId}.webp`));
+    const imagePath = path.join(dishesDir, `${fileId}.webp`);
+    checkSize(imagePath);
+    await validateImageResolution(imagePath);
   }
+
+  await validateImageResolution(resolvePublicPath("restaurant/assets/cover.webp"));
+  await validateImageResolution(
+    resolvePublicPath("restaurant/assets/placeholder.webp"),
+  );
 
   scanForSecrets(restaurantDir);
 
@@ -361,4 +400,6 @@ function main() {
   console.log("\nValidation passed.");
 }
 
-main();
+main().catch((error) => {
+  fail(error instanceof Error ? error.message : String(error));
+});

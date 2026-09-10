@@ -6,6 +6,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const assetsDir = path.join(root, "public/restaurant/assets");
 const dishesDir = path.join(assetsDir, "dishes");
 const documentsDir = path.join(assetsDir, "documents");
+const forceImages = process.argv.includes("--force-images");
 
 const dishColors = {
   1001: "#d4a574",
@@ -28,20 +29,20 @@ async function exists(filePath) {
 }
 
 async function createWebp(filePath, color, label) {
-  if (await exists(filePath)) {
+  if (!forceImages && (await exists(filePath))) {
     console.log(`Skipped existing asset: ${path.relative(root, filePath)}`);
     return;
   }
 
   const svg = `
-    <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-      <rect width="800" height="600" fill="${color}"/>
+    <svg width="1600" height="1200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1600" height="1200" fill="${color}"/>
       <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Arial, sans-serif" font-size="42" fill="#ffffff">${label}</text>
+        font-family="Arial, sans-serif" font-size="84" fill="#ffffff">${label}</text>
     </svg>
   `;
 
-  await sharp(Buffer.from(svg)).webp({ quality: 82 }).toFile(filePath);
+  await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(filePath);
 }
 
 async function createPdfPlaceholder(filePath, title) {

@@ -8,6 +8,8 @@ Production-ready **static** QR menu template for restaurants and cafes. Each rep
 - Renders categories and dishes from a single `menu.json`
 - Links dish photos by ID (`restaurant/assets/dishes/{id}.webp`)
 - Supports search, category navigation, and dish detail modal
+- Uses high-resolution WebP images in rounded, non-overlapping media areas
+- Shows an optional JSON-configured notice about necessary technical cookies
 - Applies a dynamic theme from two RGB colors
 - Shows contacts, social links, optional map (after consent), and PDF downloads
 - Builds to static files for any CDN or static host

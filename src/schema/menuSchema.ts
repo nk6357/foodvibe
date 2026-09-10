@@ -106,6 +106,14 @@ export const menuSchema = z
         privacyEmail: z.string().email().optional(),
         offerDocument: z.string().optional(),
         privacyDocument: z.string().optional(),
+        cookieNotice: z
+          .object({
+            enabled: z.boolean().default(true),
+            text: safeString(500),
+            buttonLabel: safeString(60).default("Понятно"),
+            privacyLinkLabel: safeString(60).optional(),
+          })
+          .optional(),
       })
       .default({ enabled: false }),
     seo: z
