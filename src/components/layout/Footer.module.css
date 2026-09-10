@@ -1,5 +1,5 @@
 .footer {
-  padding: 2rem 0 calc(2rem + env(safe-area-inset-bottom));
+  padding: 2rem 0 calc(6rem + env(safe-area-inset-bottom));
   border-top: 1px solid var(--color-border);
   background: var(--color-surface);
 }
@@ -29,4 +29,10 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  }
 }

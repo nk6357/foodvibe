@@ -10,6 +10,7 @@ body {
   font-family: var(--font-sans);
   background: var(--color-background);
   color: var(--color-text);
+  overflow-x: clip;
 }
 
 #root {
@@ -17,8 +18,20 @@ body {
 }
 
 .container {
-  width: min(100% - 2rem, var(--container-max));
+  width: min(
+    calc(100% - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right)),
+    var(--container-max)
+  );
   margin-inline: auto;
+}
+
+@media (max-width: 359px) {
+  .container {
+    width: min(
+      calc(100% - 1.25rem - env(safe-area-inset-left) - env(safe-area-inset-right)),
+      var(--container-max)
+    );
+  }
 }
 
 .section {

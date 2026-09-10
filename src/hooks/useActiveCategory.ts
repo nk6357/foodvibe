@@ -9,7 +9,7 @@ interface UseActiveCategoryOptions {
 export function useActiveCategory({
   categoryIds,
   enabled,
-  headerOffset = 120,
+  headerOffset = 141,
 }: UseActiveCategoryOptions) {
   const [activeCategoryId, setActiveCategoryId] = useState<string>(
     categoryIds[0] ?? "",
@@ -28,7 +28,10 @@ export function useActiveCategory({
       setActiveCategoryId(categoryId);
 
       const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
-      window.scrollTo({ top, behavior: "smooth" });
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
 
       if (scrollTimeoutRef.current) {
         window.clearTimeout(scrollTimeoutRef.current);
