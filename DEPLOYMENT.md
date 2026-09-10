@@ -4,48 +4,36 @@
 
 This template produces a static site in `dist/`. No server-side runtime is required.
 
-Supported hosts:
+Primary host:
 
-- GitHub Pages
-- Cloudflare Pages
-- Netlify
 - Vercel static hosting
-- Any object storage + CDN
 
 No environment variables, SMTP, database, or API endpoints are needed.
 
-## GitHub Pages
-
-GitHub Pages can publish the static QR menu.
-
-Steps:
-
-1. Enable GitHub Pages with source **GitHub Actions**
-2. Push to `main`
-3. Workflow builds and deploys automatically
-
-The Vite `base` is set to `./`, so assets work on project sites such as:
-
-```
-https://username.github.io/repository-name/
-```
-
-### GitHub Pages limitations
-
-1. GitHub Pages can host static QR menus technically.
-2. GitHub Pages does **not** run Node.js backends.
-3. GitHub Pages has restrictions on commercial and SaaS usage.
-4. Review current [GitHub Pages terms and limits](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) before paid/commercial projects.
-5. Even if the repository is private, published Pages files are public.
-6. Everything under `public/restaurant/` is publicly accessible.
-
 ## Vercel
 
-You can deploy `dist/` as a static site. Vercel Hobby is intended for non-commercial use; commercial projects may require Vercel Pro. Check current pricing terms before production use.
+Import the GitHub repository into Vercel and use these settings:
 
-## Cloudflare Pages
+- Framework preset: **Vite**
+- Build command: `npm run build`
+- Output directory: `dist`
+- Install command: `npm install` or the Vercel default
 
-Cloudflare Pages is a common alternative for commercial static hosting. Connect the repository and set:
+The same settings are committed in `vercel.json`. No environment variables are
+required. Each push to `main` creates a production deployment when the Vercel Git
+integration is enabled; other branches and pull requests create preview
+deployments.
+
+GitHub Actions performs validation, formatting checks, tests, and a production
+build. It does not publish the site; Vercel handles deployment.
+
+Vercel Hobby is intended for non-commercial use; commercial projects may require
+Vercel Pro. Check the current Vercel terms before production use.
+
+## Other static hosts
+
+The generated `dist/` directory can also be hosted on another static hosting
+service or Russian web server. Use:
 
 - Build command: `npm run build`
 - Output directory: `dist`
@@ -53,9 +41,10 @@ Cloudflare Pages is a common alternative for commercial static hosting. Connect 
 Do not generate demo assets in production CI. Commit the real restaurant assets
 before deployment and let `npm run validate` stop the build when anything is missing.
 
-## Subpath-safe assets
+## Asset paths
 
-Never hardcode absolute paths like `/restaurant/menu.json`. Always use `assetPath()` so the site works on subpaths.
+Never hardcode deployment-specific hostnames. Continue using `assetPath()` for
+menu data, documents, logos, and dish images.
 
 ## QR files
 

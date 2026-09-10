@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent,
-} from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { MenuCategory } from "@/schema/menuTypes";
 import styles from "./CategoryNavigation.module.css";
 
@@ -83,19 +77,14 @@ export function CategoryNavigation({
       return;
     }
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     scroller.scrollBy({
       left: direction * scroller.clientWidth * 0.75,
       behavior: reduceMotion ? "auto" : "smooth",
     });
   };
 
-  const handleTabKeyDown = (
-    event: KeyboardEvent<HTMLButtonElement>,
-    index: number,
-  ) => {
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextIndex: number | null = null;
 
     if (event.key === "ArrowRight") {
@@ -120,11 +109,7 @@ export function CategoryNavigation({
   };
 
   return (
-    <nav
-      id="category-navigation"
-      className={styles.nav}
-      aria-label="Категории меню"
-    >
+    <nav id="category-navigation" className={styles.nav} aria-label="Категории меню">
       <div className="container">
         <div className={styles.controls}>
           <button

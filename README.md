@@ -37,7 +37,8 @@ npm test
 npm run build
 ```
 
-6. Push to `main` — GitHub Actions validates, tests, builds, and deploys to GitHub Pages
+6. Import the repository into Vercel and push to `main` — Vercel validates,
+   builds, and deploys automatically
 7. Generate a QR code for the permanent URL:
 
 ```bash
@@ -79,13 +80,19 @@ public/restaurant/
 - [RESTAURANT_SETUP.md](./RESTAURANT_SETUP.md) — step-by-step restaurant onboarding
 - [DEPLOYMENT.md](./DEPLOYMENT.md) — hosting notes and GitHub Pages limits
 
-## GitHub Pages mode
+## Vercel deployment
 
-This template is designed for **static hosting only**:
+This template is configured for **Vercel static hosting**:
 
-- Works on GitHub Pages, Cloudflare Pages, Netlify, Vercel static export, any CDN
+- Build command: `npm run build`
+- Output directory: `dist`
+- Framework preset: Vite
 - No server, database, API, secrets, or environment variables required
-- Use relative asset paths via `assetPath()` for subpath deployments
+- `vercel.json` keeps the production settings explicit and reproducible
+
+GitHub Actions validates formatting, linting, tests, menu data, and the production
+build. Deployment is handled by the Vercel Git integration rather than GitHub
+Pages.
 
 ## QR output
 
